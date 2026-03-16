@@ -11,7 +11,7 @@ import RegistrationCards from '../components/RegistrationCards'
 
 export default function Home() {
     return (
-        <div className="min-h-screen flex flex-col bg-secondary  text-gray-900 overflow-x-hidden">
+        <div className="min-h-screen flex flex-col bg-secondary font-sans text-gray-900 overflow-x-hidden">
             <Header />
             <main className="grow flex flex-col w-full">
                 <Hero />
