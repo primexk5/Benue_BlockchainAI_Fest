@@ -20,15 +20,27 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-const allowedOrigins = process.env.CORS_ORIGIN 
-  ? process.env.CORS_ORIGIN.split(',') 
-  : ['http://localhost:5173', 'http://localhost:5174', 'https://www.benueblockchainfest.com', 'https://benueblockchainfest.com'];
+const defaultOrigins = [
+  'http://localhost:5173', 
+  'http://localhost:5174', 
+  'https://www.benueblockchainfest.com', 
+  'https://benueblockchainfest.com'
+];
+
+const envOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+  : [];
+
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    // If there's no origin (e.g. server-to-server or Postman) or it's in our list, allow it
+    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
       callback(null, true);
     } else {
+      console.error(`CORS Error: Blocked origin -> ${origin}`);
+      // Returning an error instead of false makes express-cors block the request completely
       callback(new Error('Not allowed by CORS'));
     }
   },
