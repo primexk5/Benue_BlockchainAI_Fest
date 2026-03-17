@@ -52,7 +52,7 @@ export default function AdminSpeaker() {
             if (!response.ok) {
                 if (response.status === 401) {
                     localStorage.removeItem('token')
-                    window.location.href = '/admin-login'
+                    window.location.href = '/admin/login'
                     return
                 }
                 throw new Error('Failed to fetch speaker applications')
@@ -65,7 +65,7 @@ export default function AdminSpeaker() {
             } else {
                 setError(data.message || 'Failed to fetch applications')
             }
-        } catch (err) {
+        } catch (_err) {
             setError('Failed to connect to the server')
         } finally {
             setLoading(false)
@@ -96,7 +96,7 @@ export default function AdminSpeaker() {
             if (!response.ok) {
                 if (response.status === 401) {
                     localStorage.removeItem('token')
-                    window.location.href = '/admin-login'
+                    window.location.href = '/admin/login'
                     return
                 }
                 throw new Error('Failed to delete application')
@@ -111,7 +111,7 @@ export default function AdminSpeaker() {
             } else {
                 setError(data.message || 'Failed to delete application')
             }
-        } catch (err) {
+        } catch (_err) {
             setError('Failed to delete application')
         } finally {
             setDeleteLoading(null)
@@ -210,6 +210,7 @@ export default function AdminSpeaker() {
                                 <th className="px-6 py-4">Name</th>
                                 <th className="px-6 py-4">Email</th>
                                 <th className="px-6 py-4 hidden lg:table-cell">LinkedIn / Talks</th>
+                                <th className="px-6 py-4 hidden xl:table-cell">Expertise</th>
                                 <th className="px-6 py-4">Date</th>
                                 <th className="px-6 py-4 text-right">Actions</th>
                             </tr>
@@ -230,6 +231,11 @@ export default function AdminSpeaker() {
                                         ) : (
                                             '-'
                                         )}
+                                    </td>
+                                    <td className="px-6 py-4 hidden xl:table-cell">
+                                        <p className="text-sm text-gray-400 truncate max-w-xs" title={app.expertiseDescription}>
+                                            {app.expertiseDescription}
+                                        </p>
                                     </td>
                                     <td className="px-6 py-4 text-gray-500 text-sm">{formatDate(app.createdAt)}</td>
                                     <td className="px-6 py-4 text-right">
