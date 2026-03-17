@@ -221,7 +221,7 @@ export default function Apply() {
             payload.productLink = formData.productLink
             payload.projectDescription = formData.projectDescription
         } else if (applyType === 'speaker') {
-            endpoint = '/api/speaker-application/register'
+            endpoint = '/api/speaker-application/apply'
             payload.linkedinLink = formData.linkedinLink
             payload.expertiseDescription = formData.expertiseDescription
         }
