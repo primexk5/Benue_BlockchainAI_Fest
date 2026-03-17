@@ -6,6 +6,7 @@ const partners = [
     { name: 'Partner 7', logo: '/p7.jpeg' },
     { name: 'Partner 5', logo: '/p5.jpeg' },
     { name: 'Partner 6', logo: '/p6.jpeg' },
+    { name: 'Partner 8', logo: '/p8.png' },
     { name: 'Partner 2', logo: '/p2.jpeg' },
     { name: 'Partner 3', logo: '/p3.jpeg' },
 ];
@@ -27,7 +28,7 @@ export default function CommunityPartners() {
                 </Reveal>
 
                 <Reveal delay={200}>
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 md:gap-12 items-center justify-items-center">
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 md:gap-12 items-center justify-items-center">
                         {partners.map((partner, i) => (
                             <div 
                                 key={i} 
