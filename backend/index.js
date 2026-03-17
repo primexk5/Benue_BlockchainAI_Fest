@@ -1,5 +1,8 @@
 require('dotenv').config();
 
+const dns = require('node:dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -62,15 +65,15 @@ app.use((err, req, res, next) => {
 async function startServer() {
   try {
     await sequelize.authenticate();
-    console.log('[DB] MySQL connection established successfully.');
+    console.log('[DB] PostgreSQL (Supabase) connection established successfully.');
 
     app.listen(PORT, () => {
       console.log(`[Server] Running on http://localhost:${PORT}`);
       console.log(`[Server] Environment: ${process.env.NODE_ENV || 'development'}`);
     });
   } catch (err) {
-    console.error('[DB] Unable to connect to MySQL database:', err.message);
-    console.error('[DB] Ensure MySQL is running and config/config.json credentials are correct.');
+    console.error('[DB] Unable to connect to PostgreSQL database:', err.message);
+    console.error('[DB] Ensure DATABASE_URL is configured properly.');
     process.exit(1);
   }
 }
