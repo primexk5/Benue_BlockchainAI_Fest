@@ -4,12 +4,24 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
+require('dotenv').config();
+const dns = require('node:dns');
+dns.setDefaultResultOrder('ipv4first');
+const pg = require('pg');
+if (pg?.defaults) {
+  pg.defaults.lookup = (hostname, options, callback) => {
+    if (typeof options === 'function') return dns.lookup(hostname, { family: 4 }, options);
+    return dns.lookup(hostname, { ...(options || {}), family: 4 }, callback);
+  };
+}
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
+if (config.url) {
+  sequelize = new Sequelize(config.url, config);
+} else if (config.use_env_variable && process.env[config.use_env_variable]) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);

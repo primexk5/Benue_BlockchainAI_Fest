@@ -1,5 +1,8 @@
 require('dotenv').config();
 
+const dns = require('node:dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -11,16 +14,50 @@ const hackathonRoutes = require('./routes/hackathonRoutes');
 const productShowcaseRoutes = require('./routes/productShowcaseRoutes');
 const speakerApplicationRoutes = require('./routes/speakerApplicationRoutes');
 
+const { globalLimiter } = require('./middleware/rateLimiter');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 
+const defaultOrigins = [
+  'http://localhost:5173', 
+  'http://localhost:5174', 
+  'https://www.benueblockchainfest.com', 
+  'https://benueblockchainfest.com'
+];
+
+const envOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+  : [];
+
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // If there's no origin (e.g. server-to-server or Postman) or it's in our list, allow it
+    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+      callback(null, true);
+    } else {
+      console.error(`CORS Error: Blocked origin -> ${origin}`);
+      // Returning an error instead of false makes express-cors block the request completely
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+// GLOBAL SECURITY MIDDLEWARE
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
+app.use(globalLimiter);
 
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// REQUEST PARSING WITH SIZE LIMITS (PROTECTION AGAINST LARGE PAYLOAD ATTACKS)
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 
 app.use('/api/auth', authRoutes);
@@ -49,15 +86,15 @@ app.use((err, req, res, next) => {
 async function startServer() {
   try {
     await sequelize.authenticate();
-    console.log('[DB] MySQL connection established successfully.');
+    console.log('[DB] PostgreSQL (Supabase) connection established successfully.');
 
     app.listen(PORT, () => {
       console.log(`[Server] Running on http://localhost:${PORT}`);
       console.log(`[Server] Environment: ${process.env.NODE_ENV || 'development'}`);
     });
   } catch (err) {
-    console.error('[DB] Unable to connect to MySQL database:', err.message);
-    console.error('[DB] Ensure MySQL is running and config/config.json credentials are correct.');
+    console.error('[DB] Unable to connect to PostgreSQL database:', err.message);
+    console.error('[DB] Ensure DATABASE_URL is configured properly.');
     process.exit(1);
   }
 }

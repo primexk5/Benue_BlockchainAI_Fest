@@ -1,6 +1,22 @@
-/node_modules
-/.env
-/config
-/bin
-/logs
-/test_routes.sh
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Project specific
+test_routes.sh
+/bin/
+.agents/
+skills-lock.json

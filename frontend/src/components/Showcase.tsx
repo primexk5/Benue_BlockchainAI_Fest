@@ -16,7 +16,7 @@ export default function Showcase() {
                                 Products Showcase <br className="hidden md:block" /> & Hackathon
                             </h2>
                             <p className="text-gray-500 text-lg md:text-xl leading-[1.8] font-light">
-                                Benue Blockchain AI Fest 2025 in its inaugural edition aims to
+                                Benue Blockchain AI Fest 2026 in its inaugural edition aims to
                                 spotlight innovation in Blockchain and AI technology and
                                 use through groundbreaking and useful products
                                 built to onboard the next billion users.
@@ -52,7 +52,7 @@ export default function Showcase() {
                         {/* LEFT TALL IMAGE */}
                         <div className="md:col-span-5 h-100 md:h-150 lg:h-175 overflow-hidden rounded-2xl bg-gray-50">
                             <img
-                                src="/Mask group (2).png"
+                                src="/1.jpg"
                                 alt="Speaker at event"
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
                             />
@@ -65,7 +65,7 @@ export default function Showcase() {
                             <div className="flex flex-col sm:flex-row gap-6 md:gap-8 h-auto md:h-1/2">
                                 <div className="w-full sm:w-1/2 h-62.5 md:h-full overflow-hidden rounded-2xl bg-gray-50">
                                     <img
-                                        src="/Mask group (1).png"
+                                        src="/8.jpg"
                                         alt="Event group"
                                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
                                     />
@@ -80,7 +80,7 @@ export default function Showcase() {
                             {/* BOTTOM WIDE IMAGE */}
                             <div className="w-full h-62.5 md:h-1/2 overflow-hidden rounded-2xl bg-gray-50">
                                 <img
-                                    src="/Mask group.png"
+                                    src="/12.jpg"
                                     alt="Audience at event"
                                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
                                 />

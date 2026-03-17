@@ -19,6 +19,7 @@ export default function Header() {
         { name: 'What to expect', path: '/#expect' },
         { name: 'Location', path: '/#location' },
         { name: 'Key highlights', path: '/#highlights' },
+        { name: 'Community partners', path: '/#partners' },
     ]
 
     return (
@@ -33,11 +34,11 @@ export default function Header() {
                     {/* LOGO */}
                     <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex flex-col group relative z-50 shrink-0">
                         <h1 className="text-lg md:text-xl font-mono font-black text-white tracking-tighter leading-none transition-colors">
-                            BENUE
-                            <span className="text-primary transition-colors ml-1">FEST</span>
+                            BENUE 
+                            <span className="text-primary transition-colors ml-1">BLOCKCHAIN</span>
                         </h1>
-                        <p className="text-primary/70 font-mono text-[10px] uppercase tracking-[0.2em] mt-0.5">
-                            Blockchain AI
+                        <p className="text-primary/70 uppercase tracking-[0.2em] mt-0.5">
+                            & AI Fest
                         </p>
                     </Link>
 

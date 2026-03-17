@@ -37,14 +37,14 @@ export default function Hero() {
                         <div className="flex flex-col sm:flex-row items-center gap-6">
                             <Link
                                 to="/register"
-                                className="w-full sm:w-auto bg-primary hover:bg-primary/90 font-medium font-mono  text-lg py-4 px-10 text-center rounded-xl transition-all duration-300  hover:-translate-y-1"
+                                className="w-full sm:w-auto bg-primary hover:bg-primary/90 font-medium text-lg py-4 px-10 text-center rounded-xl transition-all duration-300  hover:-translate-y-1"
                             >
                                 Secure Your Ticket
                             </Link>
 
                             <Link
                                 to="/apply?type=hackathon"
-                                className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-white/5 font-mono hover:bg-white/10 border border-white/20 text-white font-medium text-lg py-4 px-10 rounded-xl transition-all duration-300 backdrop-blur-sm"
+                                className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-medium text-lg py-4 px-10 rounded-xl transition-all duration-300 backdrop-blur-sm"
                             >
                                 Enter Hackathon
                                 <FaArrowRight className="text-primary group-hover:translate-x-2 transition-transform" />
@@ -90,7 +90,7 @@ export default function Hero() {
                                     <span className="text-primary text-4xl font-black opacity-20">01</span>
                                 </div>
                                 <div>
-                                    <h3 className="text-3xl font-black text-secondary font-mono leading-none mb-3">72-Hour <br /> Hackathon</h3>
+                                    <h3 className="text-3xl font-black text-secondary  leading-none mb-3">72-Hour <br /> Hackathon</h3>
                                     <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden mt-4">
                                         <div className="w-[85%] h-full bg-primary rounded-full relative overflow-hidden">
                                             <div className="absolute inset-0 bg-white/30 w-full animate-[shimmer_2s_infinite]"></div>
